@@ -3,7 +3,9 @@ import bodyParser from 'body-parser'
 
 // import Controllers...
 import AdminController from './app/controller/AdminController'
+import AuthController from './app/controller/AuthController'
 
+require('./config/passport.config')
 const app = express() // define app
 
 // bodyParse USED IN index.js
@@ -14,6 +16,7 @@ app.use(
     ),
 )
 app.use('/', AdminController)
+app.use('/', AuthController)
 
 let port = process.argv[2];
 if (!port) port = process.env['PORT'];
