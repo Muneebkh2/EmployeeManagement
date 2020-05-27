@@ -1,4 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {     background-color: #8E4F9C; margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* .wrapper{
+    background-color: #8E4F9C;
+} */
+
+.theme-btn{
+    background-color: #8E4F9C;
+    color: white
+  }
+  
+  .theme-text{
+      color: #8E4F9C
+  }

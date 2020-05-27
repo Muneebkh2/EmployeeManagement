@@ -1,0 +1,35 @@
+<div class="wrapper">
+    <app-navbar></app-navbar>
+    <div class="container">
+        <mat-card>
+            <h1 class="ml-2 theme-text">Create New Employee</h1>
+            <mat-form-field appearance="outline">
+                <mat-label>Name</mat-label>
+                <input matInput>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input matInput>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Phone</mat-label>
+                <input matInput>
+            </mat-form-field>
+            <!-- 3 other fields -->
+            <mat-form-field class="mt-3" appearance="outline">
+                <mat-label>Address</mat-label>
+                <input matInput>
+            </mat-form-field>
+            <mat-form-field class="mb-5" appearance="outline">
+                <mat-label>Designation</mat-label>
+                <input matInput>
+            </mat-form-field>
+            <!-- <mat-form-field appearance="outline">
+                <mat-label>Name</mat-label>
+                <input matInput>
+            </mat-form-field> -->
+            <button mat-raised-button class="theme-btn ml-2">Add Employee</button>
+            <button mat-raised-button class="ml-2" [routerLink]="['/all-employees']">All Employees</button>
+        </mat-card>
+    </div>
+</div>
