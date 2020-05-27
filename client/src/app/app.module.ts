@@ -20,11 +20,16 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { NzTableModule } from 'ng-zorro-antd/table';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatMenuModule } from '@angular/material/menu';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 
 import { ResetComponent } from './pages/auth/reset/reset.component';
 import { AllEmployeesComponent } from './pages/employee/all-employees/all-employees.component';
+import { AddEmployeeComponent } from './pages/employee/add-employee/add-employee.component';
+import { NavbarComponent } from './pages/navbar/navbar.component';
 
 
 registerLocaleData(en);
@@ -34,7 +39,9 @@ registerLocaleData(en);
     AppComponent,
     LoginComponent,
     ResetComponent,
-    AllEmployeesComponent
+    AllEmployeesComponent,
+    AddEmployeeComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -50,8 +57,11 @@ registerLocaleData(en);
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatPaginatorModule,
+    MatMenuModule,
+    MatToolbarModule,
 
-    NzTableModule
+    MatTableModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
