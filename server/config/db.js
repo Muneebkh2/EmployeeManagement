@@ -4,7 +4,7 @@ export const DBCredentials = {
     host: 'localhost',
     user: 'root',
     pass: '',
-    database: 'document_verification'
+    database: 'employee_management'
 }
 
 const connection = mysql.createConnection(DBCredentials)
