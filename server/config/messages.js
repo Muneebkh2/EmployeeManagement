@@ -34,6 +34,11 @@ module.exports = {
         message: 'The user already exist',
         success: false,
     },
+    USER_NOT_FOUND: {
+        code: 409,
+        message: 'The requested user not found',
+        success: false,
+    },
     SUCCESSFUL_DELETE: {
         code: 200,
         message: 'Successfully deleted',
