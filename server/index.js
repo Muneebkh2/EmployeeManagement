@@ -2,21 +2,26 @@ import express from 'express' // import express
 import bodyParser from 'body-parser'
 
 // import Controllers...
-import AdminController from './app/controller/AdminController'
-import AuthController from './app/controller/AuthController'
+// import AdminController from './app/controller/AdminController'
+// import AuthController from './app/controller/AuthController'
+// require('dotenv').config()
+const routes = require('./routes/index')
 
 const app = express() // define app
 
-// bodyParse USED IN index.js
+// BodyParse USED IN index.js
 app.use(
     bodyParser.json(),
     bodyParser.urlencoded(
         { extended: true }
     ),
 )
-app.use('/', AdminController)
-app.use('/', AuthController.SignIn())
-app.use('/signup', AuthController.Signup())
+
+app.use('/api', routes);
+
+// app.use('/', AdminController)
+// app.use('/', AuthController.SignIn())
+// app.use('/signup', AuthController.Signup())
 
 let port = process.argv[2];
 if (!port) port = process.env['PORT'];
