@@ -1,20 +1,41 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from './pages/auth/login/login.component';
-import { ResetComponent } from './pages/auth/reset/reset.component';
-import { AllEmployeesComponent } from './pages/employee/all-employees/all-employees.component';
-import { AddEmployeeComponent } from './pages/employee/add-employee/add-employee.component';
+import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
+import { AdminLayoutModule } from './layouts/admin-layout/admin-layout.module';
+import { AuthLayoutModule } from './layouts/auth-layout/auth-layout.module';
 
-const routes: Routes = [
-  {path: '', redirectTo: 'login', pathMatch: 'full'},
-  {path: 'login', component: LoginComponent},
-  {path: 'reset-password', component: ResetComponent},
-  {path: 'all-employees', component: AllEmployeesComponent},
-  {path: 'create-employee', component: AddEmployeeComponent},
+const routes: Routes =[
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full',
+  }, {
+    path: '',
+    component: AdminLayoutComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: () => AdminLayoutModule,
+      }
+    ]
+  }, {
+    path: '',
+    component: AuthLayoutComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: () => AuthLayoutModule
+      }
+    ]
+  }, {
+    path: '**',
+    redirectTo: 'login'
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule { }

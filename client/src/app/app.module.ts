@@ -10,8 +10,11 @@ import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
-import { LoginComponent } from './pages/auth/login/login.component';
-// angular material imports
+
+import { ComponentModule } from '../app/pages/components/component.module'
+import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
+
 import { MatSliderModule } from '@angular/material/slider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -20,28 +23,18 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatMenuModule } from '@angular/material/menu';
-import {MatToolbarModule} from '@angular/material/toolbar';
-
-
-import { ResetComponent } from './pages/auth/reset/reset.component';
-import { AllEmployeesComponent } from './pages/employee/all-employees/all-employees.component';
-import { AddEmployeeComponent } from './pages/employee/add-employee/add-employee.component';
-import { NavbarComponent } from './pages/navbar/navbar.component';
-
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTableModule } from '@angular/material/table';
 
 registerLocaleData(en);
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    ResetComponent,
-    AllEmployeesComponent,
-    AddEmployeeComponent,
-    NavbarComponent
+    AdminLayoutComponent,
+    AuthLayoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,6 +42,7 @@ registerLocaleData(en);
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    ComponentModule,
     MatSliderModule,
     MatIconModule,
     MatCheckboxModule,
@@ -60,7 +54,6 @@ registerLocaleData(en);
     MatPaginatorModule,
     MatMenuModule,
     MatToolbarModule,
-
     MatTableModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
