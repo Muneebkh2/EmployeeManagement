@@ -6,10 +6,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./employee-profile.component.css']
 })
 export class EmployeeProfileComponent implements OnInit {
+  isVisible: boolean = false;
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+  
+  choosePicture(){
+    this.isVisible = true;
+  }
+  
+  handleCancel(){
+    this.isVisible = false;
   }
 
 }
