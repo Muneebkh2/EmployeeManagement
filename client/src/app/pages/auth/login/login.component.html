@@ -22,7 +22,7 @@
                             <mat-icon matSuffix>lock</mat-icon>
                         </mat-form-field>
                         <mat-checkbox>Remember Me!</mat-checkbox>
-                        <button mat-raised-button class="login-button theme-btn">
+                        <button mat-raised-button (click)="login(email)" class="login-button theme-btn">
                             Sign In
                         </button>
 

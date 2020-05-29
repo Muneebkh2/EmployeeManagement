@@ -26,6 +26,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
 
+// ant design imports
+import { NzModalModule } from 'ng-zorro-antd/modal';
+
 @NgModule({
   declarations: [
     AllEmployeesComponent,
@@ -61,6 +64,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatMenuModule,
     MatToolbarModule,
     MatTableModule,
+    // ant design imports 
+    NzModalModule
   ]
 })
 export class AdminLayoutModule { }
