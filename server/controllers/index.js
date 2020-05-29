@@ -1,7 +1,9 @@
 // All Controllers
 const auth = require('./AuthController')
+const admin = require('./AdminController')
 
-// Export All COntrollers
+// Export All Controllers
 module.exports = {
     auth,
+    admin,
 }
