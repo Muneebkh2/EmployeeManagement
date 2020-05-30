@@ -1,53 +1,51 @@
 <div class="wrapper">
     <div class="container">
-        <div class="mt-3 ml-5 mat-elevation-z8">
+        <div class="mt-3 ml-5">
             <div class="row">
                 <div class="col-md-6">
-                    <h1 class="text-white">All Employee</h1>
+                    <h1 class="text-white">All Employees</h1>
                 </div>
                 <div class="col-md-6">
                     <button mat-raised-button [routerLink]="['/create-employee']" class="mb-2 float-right">Add
                         Employee</button>
                 </div>
             </div>
-            <table mat-table [dataSource]="dataSource">
+            <nz-table #basicTable [nzData]="allEmployees">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of basicTable.data">
+                        <td>{{ data.name }}</td>
+                        <td>{{ data.email }}</td>
+                        <td>
+                            <!-- attendance marked button -->
+                            <button nz-button class="theme-btn btn-sm mr-3" (click)="showModal()"><span>Mark
+                                    Attendance</span></button>
+                            <nz-modal [(nzVisible)]="isVisible" nzTitle="Employee Attendance"
+                                (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+                                <nz-range-picker class="w-100"></nz-range-picker>
+                            </nz-modal>
 
-                <!-- Name Column -->
-                <ng-container matColumnDef="name">
-                    <th mat-header-cell *matHeaderCellDef> Name </th>
-                    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-                </ng-container>
+                            <button mat-icon-button [routerLink]="['/update-admin/'+data.id]" class="theme-text"
+                                aria-label="Example icon button with a home icon">
+                                <mat-icon>edit</mat-icon>
+                            </button>
 
-                <!-- Weight Column -->
-                <ng-container matColumnDef="weight">
-                    <th mat-header-cell *matHeaderCellDef> Email </th>
-                    <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
-                </ng-container>
+                            <button (click)="showConfirm(data.id)" mat-icon-button class="theme-text mr-2"
+                                aria-label="Example icon button with a home icon">
+                                <mat-icon>delete</mat-icon>
+                            </button>
 
-                <!-- Symbol Column -->
-                <ng-container matColumnDef="symbol">
-                    <th mat-header-cell *matHeaderCellDef> Phone </th>
-                    <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
-                </ng-container>
+                        </td>
+                    </tr>
+                </tbody>
+            </nz-table>
 
-                <ng-container matColumnDef="action">
-                    <th mat-header-cell *matHeaderCellDef> Actions </th>
-                    <td mat-cell *matCellDef="let element">
-                        <button mat-icon-button (click)="showConfirm('1')" class="theme-text mr-2"
-                            aria-label="Example icon button with a home icon">
-                            <mat-icon>delete</mat-icon>
-                        </button>
-                        <button mat-icon-button class="theme-text" aria-label="Example icon button with a home icon">
-                            <mat-icon>edit</mat-icon>
-                        </button>
-                    </td>
-                </ng-container>
-
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            </table>
-
-            <mat-paginator [pageSizeOptions]="[10, 20]" showFirstLastButtons></mat-paginator>
         </div>
 
     </div>

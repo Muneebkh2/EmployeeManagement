@@ -4,24 +4,24 @@
             <h1 class="ml-2 theme-text">Create New Employee</h1>
             <mat-form-field appearance="outline">
                 <mat-label>Name</mat-label>
-                <input matInput>
+                <input matInput name="empName" #empName="ngModel" [(ngModel)]="name">
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>Email</mat-label>
-                <input matInput>
+                <input matInput name="empEmail" #empEmail="ngModel" [(ngModel)]="email">
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>Phone</mat-label>
-                <input matInput>
+                <input matInput name="empPhone" #empPhone="ngModel" [(ngModel)]="phone">
             </mat-form-field>
             <!-- 3 other fields -->
             <mat-form-field class="mt-3" appearance="outline">
                 <mat-label>Address</mat-label>
-                <input matInput>
+                <input matInput name="empAddress" #empAddress="ngModel" [(ngModel)]="address">
             </mat-form-field>
             <mat-form-field class="mb-5" appearance="outline">
                 <mat-label>Designation</mat-label>
-                <input matInput>
+                <input matInput name="empDesignation" #empDesignation="ngModel" [(ngModel)]="designation">
             </mat-form-field>
             <!-- <mat-form-field appearance="outline">
                 <mat-label>Name</mat-label>
