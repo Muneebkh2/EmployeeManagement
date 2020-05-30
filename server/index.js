@@ -1,6 +1,6 @@
 import express from 'express' // import express
 import bodyParser from 'body-parser'
-
+let cors = require('cors')
 // import Controllers...
 // import AdminController from './app/controller/AdminController'
 // import AuthController from './app/controller/AuthController'
@@ -15,6 +15,7 @@ app.use(
     bodyParser.urlencoded(
         { extended: true }
     ),
+    cors()
 )
 
 app.use('/api', routes);
@@ -27,7 +28,6 @@ let port = process.argv[2];
 if (!port) port = process.env['PORT'];
 if (!port) port = 3000;
 
-app.listen(port, () =>  {
+app.listen(port, () => {
     console.log('Server started: http://localhost:' + port);
 })
-    

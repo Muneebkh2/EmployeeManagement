@@ -1,0 +1,42 @@
+<div class="wrapper">
+    <div class="container">
+        <mat-card>
+            <h1 class="ml-2 theme-text">Update Employee</h1>
+            <form role="form" #updateEmployeeForm="ngForm" novalidate>
+                <mat-form-field appearance="outline">
+                    <mat-label>Name</mat-label>
+                    <input matInput name="userName" required #userName="ngModel" [(ngModel)]="updateName">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input matInput name="userEmail" required #userEmail="ngModel" [(ngModel)]="updateEmail">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input matInput type="password" required name="password" #password="ngModel"
+                        [(ngModel)]="updatePassword">
+                </mat-form-field>
+                <!-- 3 other fields -->
+                <mat-form-field class="mb-5" appearance="outline">
+                    <mat-label>Confirm Password</mat-label>
+                    <input matInput type="password" required name="confirmPassword" #confirmPassword="ngModel"
+                        [(ngModel)]="updateCPassword">
+                </mat-form-field>
+                <!-- <mat-form-field appearance="outline">
+                        <mat-label>Name</mat-label>
+                        <input matInput>
+                    </mat-form-field> -->
+                <button mat-raised-button [disabled]="updateEmployeeForm.invalid"
+                    (click)="updateEmployee(empObje[0].id,updateEmployeeForm.value)" class="theme-btn ml-2">
+                    <span *ngIf="!spinner">
+                        Update Employee
+                    </span>
+                    <span *ngIf="spinner">
+                        Employee Updating
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </span>
+                </button>
+            </form>
+        </mat-card>
+    </div>
+</div>

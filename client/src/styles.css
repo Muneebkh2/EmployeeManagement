@@ -9,8 +9,12 @@ body {     background-color: #8E4F9C; margin: 0; font-family: Roboto, "Helvetica
 .theme-btn{
     background-color: #8E4F9C;
     color: white
-  }
-  
-  .theme-text{
-      color: #8E4F9C
+}
+
+.theme-text{
+    color: #8E4F9C
+}
+
+.ant-btn-primary {
+    background-color: #8E4F9C !important
   }

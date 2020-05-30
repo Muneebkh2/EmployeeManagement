@@ -1,35 +1,35 @@
 <div class="wrapper">
     <div class="container">
         <mat-card>
-            <h1 class="ml-2 theme-text">Create New Admin</h1>
-            <form role="form" #addAdminForm="ngForm" novalidate>
+            <h1 class="ml-2 theme-text">Update Admin</h1>
+            <form role="form" #updateAdminForm="ngForm" novalidate>
                 <mat-form-field appearance="outline">
                     <mat-label>Name</mat-label>
-                    <input matInput required name="userName" #userName="ngModel" [(ngModel)]="name">
+                    <input matInput name="userName" required #userName="ngModel" [(ngModel)]="updateName">
                 </mat-form-field>
                 <mat-form-field appearance="outline">
                     <mat-label>Email</mat-label>
-                    <input matInput required name="userEmail" #userEmail="ngModel" [(ngModel)]="email">
+                    <input matInput name="userEmail" required #userEmail="ngModel" [(ngModel)]="updateEmail">
                 </mat-form-field>
                 <mat-form-field appearance="outline">
                     <mat-label>Password</mat-label>
-                    <input matInput required name="password" #password="ngModel" [(ngModel)]="Password">
+                    <input matInput type="password" required name="password" #password="ngModel" [(ngModel)]="updatePassword">
                 </mat-form-field>
                 <!-- 3 other fields -->
                 <mat-form-field class="mb-5" appearance="outline">
                     <mat-label>Confirm Password</mat-label>
-                    <input matInput required name="confirmPassword" #confirmPassword="ngModel" [(ngModel)]="cPassword">
+                    <input matInput type="password" required name="confirmPassword" #confirmPassword="ngModel" [(ngModel)]="updateCPassword">
                 </mat-form-field>
                 <!-- <mat-form-field appearance="outline">
                     <mat-label>Name</mat-label>
                     <input matInput>
                 </mat-form-field> -->
-                <button mat-raised-button [disabled]="addAdminForm.invalid" (click)="addAdmin(addAdminForm.value)" class="theme-btn ml-2">
+                <button mat-raised-button [disabled]="updateAdminForm.invalid" (click)="updateAdmin(adminObj[0].id,updateAdminForm.value)" class="theme-btn ml-2">
                     <span *ngIf="!spinner">
-                        Add Admin
+                        Update Admin
                     </span>
                     <span *ngIf="spinner">
-                        Admin Creating
+                        Admin Updating
                         <i class="fas fa-spinner fa-spin"></i>
                     </span>
                 </button>
