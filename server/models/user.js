@@ -14,6 +14,12 @@ module.exports = (sequelize, DataTypes) => {
             as: 'roles',
             onDelete: 'CASCADE'
         })
+        // users has only UsersInfo
+        User.hasOne(models.UsersInfo, {
+            foreignKey: 'user_id',
+            as: 'UsersInfo',
+            onDelete: 'CASCADE'
+        });
     };
     return User;
 };
