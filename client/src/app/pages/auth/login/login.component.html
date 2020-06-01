@@ -1,6 +1,6 @@
 <div class="login-page">
     <mat-card class="mat-elevation-z12">
-        <mat-card-title style="text-align:center;" class="theme-text">SignIn</mat-card-title>
+        <mat-card-title style="text-align:center;" class="theme-text">Welcome</mat-card-title>
         <mat-tab-group mat-stretch-tabs class="example-stretched-tabs">
             <mat-tab label="Sign In">
                 <mat-card-content>
@@ -21,7 +21,7 @@
                             </mat-error>
                             <mat-icon matSuffix>lock</mat-icon>
                         </mat-form-field>
-                        <mat-checkbox>Remember Me!</mat-checkbox>
+                        <!-- <mat-checkbox>Remember Me!</mat-checkbox> -->
                         <button mat-raised-button (click)="login(loginForm.value)" class="login-button theme-btn">
                             <span *ngIf="!isLogginInFLAG">
                                 Sign In
@@ -33,7 +33,7 @@
                         </button>
 
                         <button mat-raised-button class="login-button" data-toggle="modal" data-target="#resetForm">
-                            Forget Password
+                            Forgot Password
                         </button>
                     </form>
                     <ng-container *ngIf="errorMessage">
