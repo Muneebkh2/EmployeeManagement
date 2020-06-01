@@ -1,5 +1,6 @@
 import express from 'express' // import express
 import bodyParser from 'body-parser'
+require('dotenv').config();
 let cors = require('cors')
 // import Controllers...
 // import AdminController from './app/controller/AdminController'
