@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AdminLayoutRoutes } from './admin-layout.routing';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // <== add the imports!
 // components imports
 import { AllEmployeesComponent } from '../../pages/employee/all-employees/all-employees.component';
 import { AddEmployeeComponent } from '../../pages/employee/add-employee/add-employee.component';
@@ -10,6 +10,8 @@ import { AddAdminComponent } from '../../pages/admin/add-admin/add-admin.compone
 import { AllAdminComponent } from '../../pages/admin/all-admin/all-admin.component';
 import { DashboardComponent } from '../../pages/dashboard/dashboard.component';
 import { EmployeeProfileComponent } from '../../pages/employee/employee-profile/employee-profile.component';
+import { UpdateAdminComponent } from '../../pages/admin/update-admin/update-admin.component';
+import { UpdateEmployeeComponent } from '../../pages/employee/update-employee/update-employee.component';
 
 // angular material imports
 import { MatSliderModule } from '@angular/material/slider';
@@ -28,6 +30,10 @@ import { MatSelectModule } from '@angular/material/select';
 
 // ant design imports
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { NzAlertModule } from 'ng-zorro-antd/alert';
 
 @NgModule({
   declarations: [
@@ -36,7 +42,9 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
     AddAdminComponent,
     AllAdminComponent,
     DashboardComponent,
-    EmployeeProfileComponent
+    EmployeeProfileComponent,
+    UpdateAdminComponent,
+    UpdateEmployeeComponent
   ],
   exports: [
     AllEmployeesComponent,
@@ -44,7 +52,9 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
     AddAdminComponent,
     AllAdminComponent,
     DashboardComponent,
-    EmployeeProfileComponent
+    EmployeeProfileComponent,
+    UpdateAdminComponent,
+    UpdateEmployeeComponent
   ],
   imports: [
     RouterModule.forChild(AdminLayoutRoutes),
@@ -65,7 +75,11 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
     MatToolbarModule,
     MatTableModule,
     // ant design imports 
-    NzModalModule
+    NzModalModule,
+    NzNotificationModule,
+    NzTableModule,
+    NzDatePickerModule,
+    NzAlertModule
   ]
 })
 export class AdminLayoutModule { }

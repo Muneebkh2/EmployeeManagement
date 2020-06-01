@@ -120,7 +120,7 @@ module.exports = {
             });
         })
             .catch(err => {
-                log('Error in finding user when logging in');
+                console.log('Error in finding user when logging in');
                 res.status(messages.INTERNAL_SERVER_ERROR.code).send(messages.INTERNAL_SERVER_ERROR);
             })
     },
