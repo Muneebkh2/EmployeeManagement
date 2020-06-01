@@ -20,14 +20,6 @@ module.exports = {
       remember_token: {
         type: Sequelize.STRING
       },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
       role_id: {
         type: Sequelize.INTEGER,
         onDelete: 'CASCADE',
@@ -36,6 +28,14 @@ module.exports = {
           key: 'id',
           as: 'role_id'
         }
+      },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE
       }
     });
   },
