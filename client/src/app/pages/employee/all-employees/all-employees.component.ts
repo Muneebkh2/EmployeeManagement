@@ -24,7 +24,7 @@ export class AllEmployeesComponent implements OnInit {
 
   get_Employees() {
     this.api.getAllEmployees().subscribe((res: any) => {
-      this.allEmployees = res
+      this.allEmployees = res;
     }, (err: any) => {
       this.displayError.create(
         'error', 'Error', err.error.message,
@@ -33,7 +33,7 @@ export class AllEmployeesComponent implements OnInit {
     })
   }
 
-  deleteAdmin(id) {
+  deleteEmployee(id) {
     this.isInProgress = true;
     this.api.deleteEmployee(id).subscribe((res: any) => {
       this.isInProgress = false; // a flag for progressing
@@ -54,11 +54,11 @@ export class AllEmployeesComponent implements OnInit {
 
   showConfirm(value): void {
     this.modalService.confirm({
-      nzTitle: 'Are you sure delete this Admin?',
+      nzTitle: 'Are you sure delete this Employee?',
       nzOkText: 'Yes',
       nzOkType: 'danger',
       nzOkLoading: this.isInProgress,
-      nzOnOk: () => this.deleteAdmin(value),
+      nzOnOk: () => this.deleteEmployee(value),
       nzCancelText: 'No',
       nzOnCancel: () => console.log('Cancel')
     });

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NzModalService, NzNotificationService } from 'ng-zorro-antd';
+import { NzNotificationService } from 'ng-zorro-antd';
 import { RestService } from 'src/app/services/rest.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -15,11 +15,12 @@ export class UpdateEmployeeComponent implements OnInit {
   empObje: any;
   spinner: boolean = false
 
-  updatePassword
-  updateCPassword
-  updateEmail
   updateName
-  
+  updateEmail
+  updatePhone
+  updateAddress
+  updateDesignation
+
   constructor(private api: RestService, private displayError: NzNotificationService, private route: ActivatedRoute, private router: Router) { }
   empID = this.route.snapshot.paramMap.get('ID');
 
@@ -30,14 +31,18 @@ export class UpdateEmployeeComponent implements OnInit {
   get_Employees() {
     this.api.getAllEmployees().subscribe((res: any) => {
       this.allEmployees = res;
-
-      let admin = this.allEmployees.filter(el => {
+      console.log(this.allEmployees)
+      let emp = this.allEmployees.filter(el => {
         return el.id == this.empID
       })
-      this.empObje = admin
+      this.empObje = emp
 
-      // this.updateName = this.adminObj[0].name
-      // this.updateEmail = this.adminObj[0].email
+      this.updateName = this.empObje[0].users.name
+      this.updateEmail = this.empObje[0].users.email
+      this.updatePhone = this.empObje[0].phone
+      this.updateAddress = this.empObje[0].address
+      this.updateDesignation = this.empObje[0].designation
+      // this.updatePassword = this.empObje[0].users.password
     }, (err: any) => {
       this.displayError.create(
         'error', 'Error', err.error.message,
@@ -51,14 +56,15 @@ export class UpdateEmployeeComponent implements OnInit {
     this.spinner = true;  // progressing flag
     // // formData body
     let body = {
-      // name: this.updateName,
-      // email: this.updateEmail,
-      // password: this.updatePassword,
-      // confirm_password: this.updateCPassword
+      name: this.updateName,
+      email: this.updateEmail,
+      phone: this.updatePhone,
+      address: this.updateAddress,
+      designation: this.updateDesignation
     };
     console.log(body)
     // send request to server.
-    this.api.updateEmployee(this.empID, body).subscribe(
+    this.api.updateEmployee(this.empObje[0].user_id, body).subscribe(
       (res: any) => {
         this.spinner = false; // progressing flag
         this.router.navigate(['/all-employees/']);

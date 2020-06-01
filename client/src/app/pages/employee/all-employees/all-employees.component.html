@@ -10,37 +10,41 @@
                         Employee</button>
                 </div>
             </div>
-            <nz-table #basicTable [nzData]="allEmployees">
+            <nz-table class="horizontalScroll" #employee [nzData]="allEmployees">
                 <thead>
                     <tr>
                         <th>Name</th>
                         <th>Email</th>
+                        <th>Phone</th>
+                        <th>Designation</th>
+                        <th>Address</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let data of basicTable.data">
-                        <td>{{ data.name }}</td>
-                        <td>{{ data.email }}</td>
-                        <td>
+                    <tr *ngFor="let data of employee.data">
+                        <td>{{ data.users.name }}</td>
+                        <td>{{ data.users.email }}</td>
+                        <td>{{ data.phone }}</td>
+                        <td>{{ data.designation }}</td>
+                        <td>{{ data.address }}</td>
+                        <td class="bg-white">
                             <!-- attendance marked button -->
-                            <button nz-button class="theme-btn btn-sm mr-3" (click)="showModal()"><span>Mark
-                                    Attendance</span></button>
+                            <button mat-button class="theme-btn btn-sm mr-3" (click)="showModal()">Mark
+                                    Attendance</button>
                             <nz-modal [(nzVisible)]="isVisible" nzTitle="Employee Attendance"
                                 (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
                                 <nz-range-picker class="w-100"></nz-range-picker>
                             </nz-modal>
 
-                            <button mat-icon-button [routerLink]="['/update-admin/'+data.id]" class="theme-text"
-                                aria-label="Example icon button with a home icon">
-                                <mat-icon>edit</mat-icon>
-                            </button>
-
-                            <button (click)="showConfirm(data.id)" mat-icon-button class="theme-text mr-2"
+                            <button (click)="showConfirm(data.user_id)" mat-icon-button class="theme-text"
                                 aria-label="Example icon button with a home icon">
                                 <mat-icon>delete</mat-icon>
                             </button>
-
+                            <button mat-icon-button [routerLink]="['/update-employee/'+data.id]" class="theme-text"
+                                aria-label="Example icon button with a home icon">
+                                <mat-icon>edit</mat-icon>
+                            </button>
                         </td>
                     </tr>
                 </tbody>
