@@ -17,8 +17,11 @@ router.get('/', (req, res) => res.status(200).send({
 // App Routes Starts Here
 // ====
 
-// Login Route
+// >>> Auth Routes
+// Login
 router.post('/login', authController.login)
+router.post('/forgotPassword/email', authController.forgotPasswordEmail)
+router.post('/forgotPassword', authController.forgotPassword)
 
 // >>> Admins Routes
 // Get Admin By ID
