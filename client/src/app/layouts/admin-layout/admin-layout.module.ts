@@ -34,6 +34,7 @@ import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
+import { RoleGuardService } from 'src/app/services/role-guard.service';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,7 @@ import { NzAlertModule } from 'ng-zorro-antd/alert';
     NzTableModule,
     NzDatePickerModule,
     NzAlertModule
-  ]
+  ],
+  providers: [RoleGuardService],
 })
 export class AdminLayoutModule { }

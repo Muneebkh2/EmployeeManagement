@@ -1,30 +1,30 @@
 <div class="sidebar">
     <div class="heading">
-        <h2 class="ml-4 mt-3">Company Name</h2>
+        <h2 class="ml-4 mt-3">Employee Managemant</h2>
     </div>
 
     <div>
         <!-- Navigation -->
         <ul class="navbar-nav ml-4">
-            <li class="nav-item">
+            <li class="nav-item" *ngIf="this.token.retrieveUserRole() == 1">
                 <a routerLinkActive="active" [routerLink]="['/dashboard/']" class="nav-link">
                     <i class="fas fa-clock"></i>
                     Dashboard
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" *ngIf="this.token.retrieveUserRole() == 1">
                 <a routerLinkActive="active" [routerLink]="['/all-employees/']" class="nav-link">
                     <i class="fas fa-users"></i>
                      Employees
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" *ngIf="this.token.retrieveUserRole() == 1">
                 <a routerLinkActive="active" [routerLink]="['/all-admins/']" class="nav-link">
                     <i class="fas fa-users-cog"></i>
                      Admins
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" *ngIf="this.token.retrieveUserRole() == 3">
                 <a routerLinkActive="active" [routerLink]="['/employee-profile/']" class="nav-link">
                     <i class="fas fa-user-circle"></i>
                      Profile

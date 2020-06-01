@@ -37,20 +37,20 @@ export class RestService {
 
   // getting all employees
   getAllEmployees() {
-    return this.http.get(this.localhost + 'admin/all')
+    return this.http.get(this.localhost + 'employee/all')
   }
   // create an employee
   createEmployee(body) {
-    return this.http.post(this.localhost + 'admin/create', body)
+    return this.http.post(this.localhost + 'employee/create', body)
   }
   // update employee by id
   updateEmployee(id, body) {
-    return this.http.put(this.localhost + `admin/update/${id}`, body)
+    return this.http.put(this.localhost + `employee/update/${id}`, body)
   }
 
   // delete employee by id
   deleteEmployee(id) {
-    return this.http.delete(this.localhost + `admin/delete/${id}`)
+    return this.http.delete(this.localhost + `employee/delete/${id}`)
   }
 
 }

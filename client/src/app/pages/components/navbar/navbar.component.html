@@ -1,7 +1,7 @@
 <button mat-button [matMenuTriggerFor]="beforeMenu" class="text-white float-right m-2"><span>
         <img class="profile-pic mr-2" src="https://avatars2.githubusercontent.com/u/41924807?s=460&u=784a8669fe3e48f5c1dab9a423d67bbce4ac948c&v=4" alt="profile picture">
-    </span>amansultan@employee.com</button>
+    </span>{{ this.token.retrieveAllInfo().email }}</button>
 <mat-menu #beforeMenu="matMenu" xPosition="before">
     <button mat-menu-item>Settings</button>
-    <button mat-menu-item [routerLink]="['/login']">Logout</button>
+    <button mat-menu-item (click)="logout()">Logout</button>
 </mat-menu>
