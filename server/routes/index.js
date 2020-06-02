@@ -7,6 +7,7 @@ const router = express.Router()
 const authController = require('../controllers').auth
 const adminController = require('../controllers').admin
 const employeeController = require('../controllers').employee
+const attendanceController = require('../controllers').attendance
 
 // Welcome Check
 router.get('/', (req, res) => res.status(200).send({
@@ -46,5 +47,8 @@ router.post('/employee/create', employeeController.createEmployee)
 router.put('/employee/update/:id', employeeController.updateEmployee)
 // Delete Employee
 router.delete('/employee/delete/:id', employeeController.deleteEmployee)
+// >>> Employees Attendance Routes
+// Mark **
+router.post('/employee/attendance/mark/', attendanceController.markAttendance)
 
 module.exports = router;
