@@ -50,5 +50,7 @@ router.delete('/employee/delete/:id', employeeController.deleteEmployee)
 // >>> Employees Attendance Routes
 // Mark **
 router.post('/employee/attendance/mark/', attendanceController.markAttendance)
+// Get **
+router.get('/employee/attendance/get/:id', attendanceController.getAttendance)
 
 module.exports = router;
