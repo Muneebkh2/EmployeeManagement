@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { TokenManagerService } from 'src/app/services/token-manager.service';
+import { NzNotificationService } from 'ng-zorro-antd';
 
 @Component({
     selector: 'app-login',
@@ -11,8 +12,9 @@ import { TokenManagerService } from 'src/app/services/token-manager.service';
 export class LoginComponent implements OnInit {
     isLogginInFLAG: boolean = false;
     errorMessage: string;
+    spinner: boolean = false;
 
-    constructor(private router: Router, private api: AuthService, private token: TokenManagerService) { }
+    constructor(private displayError: NzNotificationService, private router: Router, private api: AuthService, private token: TokenManagerService) { }
 
     ngOnInit(): void {
     }
@@ -40,6 +42,31 @@ export class LoginComponent implements OnInit {
             (err) => {
                 this.isLogginInFLAG = false; // reset flag to display spinner
                 this.errorMessage = 'Invalid login credentials';
+            }
+        );
+    }
+
+
+    sendEmail(value) {
+        this.spinner = true;  // progressing flag
+        // send request to server.
+        this.api.forgotPasswordEmail(value).subscribe(
+            (res: any) => {
+                this.spinner = false; // progressing flag
+                this.displayError.create(
+                    'success', 'Success', res.message,
+                    { nzDuration: 6500 }
+                );
+                setTimeout(() => {
+                    location.reload()
+                }, 1000);
+            },
+            (err: any) => {
+                this.spinner = false; // progressing flag
+                this.displayError.create(
+                    'error', 'Error', err.error.message,
+                    { nzDuration: 6500 }
+                );
             }
         );
     }
