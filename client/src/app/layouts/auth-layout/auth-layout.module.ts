@@ -18,6 +18,11 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTableModule } from '@angular/material/table';
+
+// ant design imports
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
+
+
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
@@ -45,6 +50,7 @@ import { FormsModule } from '@angular/forms';
     MatMenuModule,
     MatToolbarModule,
     MatTableModule,
+    NzNotificationModule
   ]
 })
 export class AuthLayoutModule { }
