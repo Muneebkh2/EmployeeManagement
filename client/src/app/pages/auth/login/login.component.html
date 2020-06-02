@@ -97,25 +97,27 @@
 <div class="modal fade" id="resetForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Forget Password Now</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+        <form #forgetEmail="ngForm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Forget Password Now</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <mat-form-field>
+                        <input matInput placeholder="Forget Password" required name="email" ngModel #email="ngModel">
+                        <mat-error *ngIf="email.invalid">Email is required</mat-error>
+                        <mat-icon matSuffix>email</mat-icon>
+                    </mat-form-field>
+                </div>
+                <div class="modal-footer">
+                    <button mat-raised-button (click)="sendEmail(forgetEmail.value)" class="theme-btn">
+                        Done
+                    </button>
+                </div>
             </div>
-            <div class="modal-body">
-                <mat-form-field>
-                    <input matInput placeholder="Forget Password" required name="email" ngModel #email="ngModel">
-                    <mat-error *ngIf="email.invalid">Email is required</mat-error>
-                    <mat-icon matSuffix>email</mat-icon>
-                </mat-form-field>
-            </div>
-            <div class="modal-footer">
-                <button mat-raised-button class="theme-btn">
-                    Done
-                </button>
-            </div>
-        </div>
+        </form>
     </div>
 </div>
