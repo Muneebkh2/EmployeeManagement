@@ -30,7 +30,6 @@ export class LoginComponent implements OnInit {
 
         this.api.login(body).subscribe(
             (res: any) => {
-                console.log(res)
                 this.token.store(res.token, res.user.role, res.user.email, res.user.name, res.user.id);
                 this.isLogginInFLAG = false; // reset flag to display spinner
                 if (this.token.retrieveUserRole() === 1) {

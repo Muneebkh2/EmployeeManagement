@@ -30,13 +30,22 @@
                         <td>{{ data.address }}</td>
                         <td class="bg-white">
                             <!-- attendance marked button -->
-                            <button mat-button class="theme-btn btn-sm mr-3" (click)="showModal()">Mark
-                                    Attendance</button>
-                            <nz-modal [(nzVisible)]="isVisible" nzTitle="Employee Attendance"
-                                (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
-                                <nz-range-picker class="w-100"></nz-range-picker>
-                            </nz-modal>
-
+                            <button class="theme-text" mat-icon-button [matMenuTriggerFor]="appMenu">
+                                <mat-icon>calendar_today</mat-icon>
+                            </button>
+                            <mat-menu #appMenu="matMenu" class="drop-calendar">
+                                <div (click)="$event.stopPropagation()">
+                                    <label class="ml-3 mt-3">Status:</label>
+                                    <select class="w-25 ml-3 mt-3">
+                                        <option value="0">Select</option>
+                                        <option value="1">Present</option>
+                                        <option value="2">Absent</option>
+                                    </select>
+                                    <mat-calendar #calendar (selectedChange)="select($event,calendar)"
+                                        [dateClass]="isSelected"></mat-calendar>
+                                </div>
+                                <button class="theme-btn btn-sm ml-3" (click)="addAttendance()">Mark Attendance</button>
+                            </mat-menu>
                             <button (click)="showConfirm(data.user_id)" mat-icon-button class="theme-text"
                                 aria-label="Example icon button with a home icon">
                                 <mat-icon>delete</mat-icon>
