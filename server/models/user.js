@@ -20,6 +20,8 @@ module.exports = (sequelize, DataTypes) => {
             as: 'UsersInfo',
             onDelete: 'CASCADE'
         });
+        // users has many attendance
+        User.hasMany(models.Attendance, { as: "attendance" })
     };
     return User;
 };
