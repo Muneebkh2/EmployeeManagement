@@ -27,6 +27,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 
 // ant design imports
 import { NzModalModule } from 'ng-zorro-antd/modal';
@@ -35,6 +37,7 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { RoleGuardService } from 'src/app/services/role-guard.service';
+import { NzCalendarModule } from 'ng-zorro-antd/calendar';
 
 @NgModule({
   declarations: [
@@ -75,12 +78,16 @@ import { RoleGuardService } from 'src/app/services/role-guard.service';
     MatMenuModule,
     MatToolbarModule,
     MatTableModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatRippleModule,
     // ant design imports 
     NzModalModule,
     NzNotificationModule,
     NzTableModule,
     NzDatePickerModule,
-    NzAlertModule
+    NzAlertModule,
+    NzCalendarModule
   ],
   providers: [RoleGuardService],
 })

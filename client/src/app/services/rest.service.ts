@@ -39,6 +39,7 @@ export class RestService {
   getAllEmployees() {
     return this.http.get(this.localhost + 'employee/all')
   }
+
   // create an employee
   createEmployee(body) {
     return this.http.post(this.localhost + 'employee/create', body)
@@ -51,6 +52,15 @@ export class RestService {
   // delete employee by id
   deleteEmployee(id) {
     return this.http.delete(this.localhost + `employee/delete/${id}`)
+  }
+
+  // *****************
+  //  Employee CRUD -> Request Methods
+  // *****************
+
+  // marked attendance
+  markedAttendance(body) {
+    return this.http.post(this.localhost + 'employee/attendance/mark', body)
   }
 
 }
