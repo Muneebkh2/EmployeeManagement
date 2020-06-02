@@ -6,6 +6,26 @@ const models = require('../models/index')
 
 'use strict';
 module.exports = {
+    getAttendance: (req, res) => {
+        // const userId = req.params.id;
+        models.User.findByPk(req.params.id).then(user => {
+            // Check if record not exists
+            if (user == null) {
+                res.status(messages.USER_NOT_FOUND.code).send(messages.USER_NOT_FOUND);
+                res.end();
+            }
+
+            models.Attendance.findOne({ 
+                where: { user_id: req.params.id }
+            }).then(
+                attendance => {
+                    console.log("Attendance: ", attendance);
+                    res.status(messages.SUCCESSFUL.code).send(attendance);
+                }
+            )
+
+        });
+    },
     // mark Attendance of employee
     markAttendance: (req, res) => {
         const userId = req.body.user_id
