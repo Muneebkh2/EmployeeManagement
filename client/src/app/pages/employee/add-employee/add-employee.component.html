@@ -32,8 +32,15 @@
                 <mat-label>Name</mat-label>
                 <input matInput>
             </mat-form-field> -->
-                <button mat-raised-button class="theme-btn ml-2" (click)="addEmployee(addEmployeeForm.value)">Add
-                    Employee</button>
+                <button mat-raised-button class="theme-btn ml-2" (click)="addEmployee(addEmployeeForm.value)">
+                    <span *ngIf="!spinner">
+                        Add Employee
+                    </span>
+                    <span *ngIf="spinner">
+                        Adding Employee
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </span>
+</button>
             </form>
         </mat-card>
     </div>

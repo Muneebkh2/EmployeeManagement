@@ -31,7 +31,14 @@
             </mat-form-field> -->
                 <button mat-raised-button [disabled]="updateEmployeeForm.invalid" class="theme-btn ml-2"
                     (click)="updateEmployee(updateEmployeeForm.value, empObje.id)">
-                    Update Employee</button>
+                    <span *ngIf="!spinner">
+                        Update Employee
+                    </span>
+                    <span *ngIf="spinner">
+                        Updating Employee
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </span>
+                </button>
             </form>
         </mat-card>
     </div>
