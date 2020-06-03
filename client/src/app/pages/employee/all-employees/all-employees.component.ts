@@ -29,9 +29,9 @@ export class AllEmployeesComponent implements OnInit {
   selectedDate: any
 
   present_dates: any = [
-    { date: "2020-06-04", status: true },
-    { date: "2020-06-05", status: true },
-    { date: "2020-06-08", status: true },
+    // { date: "2020-06-04", status: true },
+    // { date: "2020-06-05", status: true },
+    // { date: "2020-06-08", status: true },
   ];
   date: any[];
   highlightDate: boolean;
@@ -64,7 +64,7 @@ export class AllEmployeesComponent implements OnInit {
 
   // get marked attendace
   markedAttendance(id) {
-    this.api.getMarkedAttendance(id).subscribe( (res: any) => {
+    this.api.getMarkedAttendance(id).subscribe((res: any) => {
       this.date = res
       console.log("res", res)
       this.date.forEach(el => {
@@ -131,7 +131,7 @@ export class AllEmployeesComponent implements OnInit {
   addAttendance() {
     let body = {
       user_id: this.user_id,
-      dates_marked: this.present_dates
+      dates_marked: this.attendance_Dates
     }
     this.api.markedEmpAttendance(body).subscribe(
       (res: any) => {
@@ -152,18 +152,13 @@ export class AllEmployeesComponent implements OnInit {
       })
   }
 
-  onSelect(event) {
-    console.log(event);
-    this.selectedDate = event;
-  }
-
   dateClass() {
     return (date: Date): MatCalendarCellCssClasses => {
-      this.highlightDate = this.present_dates
+      const highlightDate = this.attendance_Dates
         .map(strDate => new Date(strDate.date))
         .some(d => d.getDate() === date.getDate() && d.getMonth() === date.getMonth() && d.getFullYear() === date.getFullYear());
 
-      return this.highlightDate ? 'present-date' : 'default'
+      return highlightDate ? 'present-date' : '';
     };
   }
 
@@ -203,13 +198,13 @@ export class AllEmployeesComponent implements OnInit {
           this.marked_dates.push(this.daysSelected[i]);
         }
       }
-      console.log(this.present_dates)
+      // this.attendance_Dates = []
       this.present_dates = []
       this.marked_dates.forEach(el => {
         this.present_dates.push({ 'date': el, 'status': Number(this.emp_status) })
       })
-      this.present_dates.push(...this.attendance_Dates)
-      console.log(this.present_dates)
+      this.attendance_Dates.push(...this.present_dates)
+      console.log(this.attendance_Dates)
     }
   }
 
