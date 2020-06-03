@@ -63,4 +63,8 @@ export class RestService {
     return this.http.post(this.localhost + 'employee/attendance/mark', body)
   }
 
+  getMarkedAttendance(id) {
+    return this.http.get(this.localhost + 'employee/attendance/get/' + id)
+  }
+
 }

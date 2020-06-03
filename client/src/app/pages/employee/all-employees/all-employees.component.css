@@ -9,11 +9,15 @@ table {
 
 .mat-calendar-body-cell.selected
 {
-  background-color:#8E4F9C!important;
+  background-color:#8E4F9C !important;
   border-radius: 50%
 }
 .drop-calendar
 
 {
   width:30rem
+}
+
+.highlight-date{
+  background: red
 }
