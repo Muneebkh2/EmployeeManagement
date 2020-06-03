@@ -30,7 +30,7 @@
                         <td>{{ data.address }}</td>
                         <td class="bg-white">
                             <!-- attendance marked button -->
-                            <button class="theme-text" mat-icon-button [matMenuTriggerFor]="appMenu">
+                            <button class="theme-text" mat-icon-button (click)="showModal(data.user_id)" [matMenuTriggerFor]="appMenu">
                                 <mat-icon>calendar_today</mat-icon>
                             </button>
                             <mat-menu #appMenu="matMenu" class="drop-calendar">
