@@ -15,7 +15,7 @@ module.exports = {
                 res.end();
             }
 
-            models.Attendance.findOne({ 
+            models.Attendance.findAll({ 
                 where: { user_id: req.params.id }
             }).then(
                 attendance => {
