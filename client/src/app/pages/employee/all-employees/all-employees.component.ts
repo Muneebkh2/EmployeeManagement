@@ -73,14 +73,14 @@ export class AllEmployeesComponent implements OnInit {
   }
 
   showModal(userId) {
-    this.isVisible = true;
     this.user_id = userId
   }
 
   addAttendance() {
+    
     let body = {
       user_id: this.user_id,
-      dates_marked: this.marked_dates
+      dates_marked: this.present_dates
     }
 
     this.api.markedAttendance(body).subscribe((res: any) => {
