@@ -203,10 +203,12 @@ export class AllEmployeesComponent implements OnInit {
           this.marked_dates.push(this.daysSelected[i]);
         }
       }
+      console.log(this.present_dates)
       this.present_dates = []
       this.marked_dates.forEach(el => {
-        this.attendance_Dates.push({ 'date': el, 'status': Number(this.emp_status) })
+        this.present_dates.push({ 'date': el, 'status': Number(this.emp_status) })
       })
+      this.present_dates.push(...this.attendance_Dates)
       console.log(this.present_dates)
     }
   }
