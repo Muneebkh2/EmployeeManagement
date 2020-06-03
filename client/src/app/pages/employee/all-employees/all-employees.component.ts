@@ -29,12 +29,14 @@ export class AllEmployeesComponent implements OnInit {
   selectedDate: any
 
   present_dates: any = [
-    { date: "2020-06-04", status: 1 },
-    // { date: "2020-06-04" },
-    // { date: "2020-06-05" }
+    { date: "2020-06-04", status: true },
+    { date: "2020-06-05", status: true },
+    { date: "2020-06-08", status: true },
   ];
   date: any[];
-
+  highlightDate: boolean;
+  show: boolean = false
+  attendance_Dates: any = [];
 
   constructor(private modalService: NzModalService, private displayError: NzNotificationService, private api: RestService) { }
 
@@ -43,7 +45,7 @@ export class AllEmployeesComponent implements OnInit {
   }
 
   markStatus(event) {
-    this.emp_status = event
+    this.emp_status = event;
   }
 
   formatDate(date) {
@@ -62,12 +64,13 @@ export class AllEmployeesComponent implements OnInit {
 
   // get marked attendace
   markedAttendance(id) {
-    this.api.getMarkedAttendance(id).subscribe((res: any) => {
-      this.date = [res]
+    this.api.getMarkedAttendance(id).subscribe( (res: any) => {
+      this.date = res
+      console.log("res", res)
       this.date.forEach(el => {
-        this.present_dates.push({ 'date': this.formatDate(el.day), 'status': el.status })
+        // this.present_dates.push({ 'date': this.formatDate(el.day), 'status': el.status })
+        this.attendance_Dates.push({ 'date': this.formatDate(el.day), 'status': el.status })
       })
-      console.log(this.present_dates)
     }, (err: any) => {
       this.displayError.create(
         'error', 'Error', err.error.message,
@@ -130,7 +133,7 @@ export class AllEmployeesComponent implements OnInit {
       user_id: this.user_id,
       dates_marked: this.present_dates
     }
-    this.api.markedAttendance(body).subscribe(
+    this.api.markedEmpAttendance(body).subscribe(
       (res: any) => {
         this.displayError.create(
           'success', 'Success', res.message.message,
@@ -156,11 +159,11 @@ export class AllEmployeesComponent implements OnInit {
 
   dateClass() {
     return (date: Date): MatCalendarCellCssClasses => {
-      const highlightDate = this.present_dates
+      this.highlightDate = this.present_dates
         .map(strDate => new Date(strDate.date))
         .some(d => d.getDate() === date.getDate() && d.getMonth() === date.getMonth() && d.getFullYear() === date.getFullYear());
 
-      return highlightDate ? 'special-date' : '';
+      return this.highlightDate ? 'present-date' : 'default'
     };
   }
 
@@ -202,7 +205,7 @@ export class AllEmployeesComponent implements OnInit {
       }
       this.present_dates = []
       this.marked_dates.forEach(el => {
-        this.present_dates.push({ 'date': el, 'status': Number(this.emp_status) })
+        this.attendance_Dates.push({ 'date': el, 'status': Number(this.emp_status) })
       })
       console.log(this.present_dates)
     }

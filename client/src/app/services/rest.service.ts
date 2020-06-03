@@ -59,7 +59,7 @@ export class RestService {
   // *****************
 
   // marked attendance
-  markedAttendance(body) {
+  markedEmpAttendance(body) {
     return this.http.post(this.localhost + 'employee/attendance/mark', body)
   }
 
