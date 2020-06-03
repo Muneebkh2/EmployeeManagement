@@ -5,7 +5,9 @@ import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { NzNotificationService, NzCalendarMode } from 'ng-zorro-antd';
 import { RestService } from 'src/app/services/rest.service';
 import { async } from '@angular/core/testing';
-
+import { MatCalendarCellCssClasses } from '@angular/material/datepicker';
+// import { MatCalendarCellCssClasses } from '@angular/material/datepicker/public-api';
+// import { MatCalendarCellCssClasses } from '@angular/material/datepicker/calendar-body';
 @Component({
   selector: 'app-all-employees',
   templateUrl: './all-employees.component.html',
@@ -21,12 +23,57 @@ export class AllEmployeesComponent implements OnInit {
   daysSelected: any[] = [];
   event: any;
   marked_dates: any[] = [];
-  present_dates: any = [];
+  dates: any[] = [];
+  modal
+  emp_status: any;
+  selectedDate: any
+
+  present_dates: any = [
+    { date: "2020-06-04", status: 1 },
+    // { date: "2020-06-04" },
+    // { date: "2020-06-05" }
+  ];
+  date: any[];
+
 
   constructor(private modalService: NzModalService, private displayError: NzNotificationService, private api: RestService) { }
 
   ngOnInit() {
     this.get_Employees();
+  }
+
+  markStatus(event) {
+    this.emp_status = event
+  }
+
+  formatDate(date) {
+    var d = new Date(date),
+      month = '' + (d.getMonth() + 1),
+      day = '' + d.getDate(),
+      year = d.getFullYear();
+
+    if (month.length < 2)
+      month = '0' + month;
+    if (day.length < 2)
+      day = '0' + day;
+
+    return [year, month, day].join('-');
+  }
+
+  // get marked attendace
+  markedAttendance(id) {
+    this.api.getMarkedAttendance(id).subscribe((res: any) => {
+      this.date = [res]
+      this.date.forEach(el => {
+        this.present_dates.push({ 'date': this.formatDate(el.day), 'status': el.status })
+      })
+      console.log(this.present_dates)
+    }, (err: any) => {
+      this.displayError.create(
+        'error', 'Error', err.error.message,
+        { nzDuration: 6500 }
+      );
+    })
   }
 
   get_Employees() {
@@ -74,73 +121,91 @@ export class AllEmployeesComponent implements OnInit {
 
   showModal(userId) {
     this.user_id = userId
+    this.markedAttendance(this.user_id)
   }
 
+  // mark attendance
   addAttendance() {
-    
     let body = {
       user_id: this.user_id,
       dates_marked: this.present_dates
     }
+    this.api.markedAttendance(body).subscribe(
+      (res: any) => {
+        this.displayError.create(
+          'success', 'Success', res.message.message,
+          { nzDuration: 4500 }
+        );
+        setTimeout(() => {
+          location.reload()
+        }, 60.00);
+      },
 
-    this.api.markedAttendance(body).subscribe((res: any) => {
-      this.isInProgress = false; // a flag for progressing
-      this.displayError.create(
-        'success', 'Success', res.message,
-        { nzDuration: 6500 }
-      );
-    }),
       (err: any) => {
         this.displayError.create(
-          'error', 'Error', err.error.message,
+          'error', 'Error', err.error.email,
           { nzDuration: 6500 }
         );
-      }
-    this.isVisible = false;
+      })
   }
 
-  isSelected = (event: any) => {
+  onSelect(event) {
+    console.log(event);
+    this.selectedDate = event;
+  }
+
+  dateClass() {
+    return (date: Date): MatCalendarCellCssClasses => {
+      const highlightDate = this.present_dates
+        .map(strDate => new Date(strDate.date))
+        .some(d => d.getDate() === date.getDate() && d.getMonth() === date.getMonth() && d.getFullYear() === date.getFullYear());
+
+      return highlightDate ? 'special-date' : '';
+    };
+  }
+
+  isSelected = (event: any, current: Date) => {
     const date =
       event.getFullYear() +
       "-" +
       ("00" + (event.getMonth() + 1)).slice(-2) +
       "-" +
       ("00" + event.getDate()).slice(-2);
+
     return this.daysSelected.find(x => x == date) ? "selected" : null;
   };
 
   select(event: any, calendar: any) {
-    const date =
-      event.getFullYear() +
-      "-" +
-      ("00" + (event.getMonth() + 1)).slice(-2) +
-      "-" +
-      ("00" + event.getDate()).slice(-2);
-    const index = this.daysSelected.findIndex(x => x == date);
-    if (index < 0) this.daysSelected.push(date);
-    else this.daysSelected.splice(index, 1);
-
-    calendar.updateTodaysDate();
-
-    for (let i = 0; i < this.daysSelected.length; i++) {
-      if (this.marked_dates.indexOf(this.daysSelected[i]) === -1) {
-        this.marked_dates.push(this.daysSelected[i]);
-      }
+    if (this.emp_status == undefined) {
+      this.displayError.create(
+        'error', 'Error', 'Please select the status!',
+        { nzDuration: 6500 }
+      );
     }
-    this.present_dates = []
-    this.marked_dates.forEach(el => {
-      // this.present_dates = null
-      this.present_dates.push({ 'date': el, 'status': 1 })
-    })
+    else {
+      const date =
+        event.getFullYear() +
+        "-" +
+        ("00" + (event.getMonth() + 1)).slice(-2) +
+        "-" +
+        ("00" + event.getDate()).slice(-2);
+      const index = this.daysSelected.findIndex(x => x == date);
+      if (index < 0) this.daysSelected.push(date);
+      else this.daysSelected.splice(index, 1);
 
-    // this.present_dates.filter((date, i) => {
-    //   if (date == this.marked_dates[i].date)
-    //     this.present_dates.push(date)
-    // })
-    // console.log(this.marked_dates)
+      calendar.updateTodaysDate();
 
-    console.log(this.present_dates)
-
+      for (let i = 0; i < this.daysSelected.length; i++) {
+        if (this.marked_dates.indexOf(this.daysSelected[i]) === -1) {
+          this.marked_dates.push(this.daysSelected[i]);
+        }
+      }
+      this.present_dates = []
+      this.marked_dates.forEach(el => {
+        this.present_dates.push({ 'date': el, 'status': Number(this.emp_status) })
+      })
+      console.log(this.present_dates)
+    }
   }
 
 }
