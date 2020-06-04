@@ -37,6 +37,7 @@ export class AllEmployeesComponent implements OnInit {
   highlightDate: boolean;
   show: boolean = false
   attendance_Dates: any = [];
+  startDate = new Date().toISOString();
 
   constructor(private modalService: NzModalService, private displayError: NzNotificationService, private api: RestService) { }
 
@@ -68,7 +69,6 @@ export class AllEmployeesComponent implements OnInit {
       this.date = res
       console.log("res", res)
       this.date.forEach(el => {
-        // this.present_dates.push({ 'date': this.formatDate(el.day), 'status': el.status })
         this.attendance_Dates.push({ 'date': this.formatDate(el.day), 'status': el.status })
       })
     }, (err: any) => {
@@ -129,9 +129,17 @@ export class AllEmployeesComponent implements OnInit {
 
   // mark attendance
   addAttendance() {
+    // removing duplicate objects from array
+    let result = this.attendance_Dates.reduce((unique, o) => {
+      if (!unique.some(obj => obj.date === o.date && obj.status === o.status)) {
+        unique.push(o);
+      }
+      return unique;
+    }, []);
+
     let body = {
       user_id: this.user_id,
-      dates_marked: this.attendance_Dates
+      dates_marked: result
     }
     this.api.markedEmpAttendance(body).subscribe(
       (res: any) => {
@@ -157,8 +165,8 @@ export class AllEmployeesComponent implements OnInit {
       const highlightDate = this.attendance_Dates
         .map(strDate => new Date(strDate.date))
         .some(d => d.getDate() === date.getDate() && d.getMonth() === date.getMonth() && d.getFullYear() === date.getFullYear());
-
-      return highlightDate ? 'present-date' : '';
+      
+        return highlightDate ? 'present-date' : '';
     };
   }
 
@@ -198,13 +206,11 @@ export class AllEmployeesComponent implements OnInit {
           this.marked_dates.push(this.daysSelected[i]);
         }
       }
-      // this.attendance_Dates = []
       this.present_dates = []
       this.marked_dates.forEach(el => {
         this.present_dates.push({ 'date': el, 'status': Number(this.emp_status) })
       })
       this.attendance_Dates.push(...this.present_dates)
-      console.log(this.attendance_Dates)
     }
   }
 

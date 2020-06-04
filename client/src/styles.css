@@ -21,10 +21,13 @@ body {     background-color: #8E4F9C; margin: 0; font-family: Roboto, "Helvetica
 
   .absent-date {
     background-color: red;
+    border-radius: 100%
   }
   .present-date {
     background-color: green;
+    border-radius: 100%
   }
   .default {
     background-color: white;
+    border-radius: 100%
   }

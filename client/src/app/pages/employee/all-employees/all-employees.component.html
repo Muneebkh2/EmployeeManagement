@@ -42,7 +42,7 @@
                                         <option value="1">Present</option>
                                     </select>
                                     <mat-calendar #calendar [selected]="" (selectedChange)="select($event,calendar)"
-                                    [dateClass]="dateClass()"></mat-calendar>
+                                    [dateClass]="dateClass()" startView="year" [startAt]="startDate"></mat-calendar>
                                 </div>
                                 <button class="theme-btn btn-sm ml-3" (click)="addAttendance()">Mark Attendance</button>
                             </mat-menu>
