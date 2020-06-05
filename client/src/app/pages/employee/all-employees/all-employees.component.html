@@ -42,7 +42,10 @@
                                         <option value="1">Present</option>
                                     </select>
                                     <mat-calendar #calendar [selected]="" (selectedChange)="select($event,calendar)"
-                                    [dateClass]="dateClass()" startView="year" [startAt]="startDate"></mat-calendar>
+                                    [dateClass]="presentClass()" startView="year" [startAt]="startDate"></mat-calendar>
+                                   <label class="ml-3 mt-5">Check Absents<i class="fas fa-arrow-down ml-2"></i></label> 
+                                    <mat-calendar #calendar [selected]="" (selectedChange)="select($event,calendar)"
+                                    [dateClass]="absentClass()" startView="year" [startAt]="startDate"></mat-calendar>
                                 </div>
                                 <button class="theme-btn btn-sm ml-3" (click)="addAttendance()">Mark Attendance</button>
                             </mat-menu>

@@ -38,6 +38,8 @@ export class AllEmployeesComponent implements OnInit {
   show: boolean = false
   attendance_Dates: any = [];
   startDate = new Date().toISOString();
+  presentDateArray: any = [];
+  absentDateArray: any = [];
 
   constructor(private modalService: NzModalService, private displayError: NzNotificationService, private api: RestService) { }
 
@@ -160,13 +162,32 @@ export class AllEmployeesComponent implements OnInit {
       })
   }
 
-  dateClass() {
+  presentClass() {
     return (date: Date): MatCalendarCellCssClasses => {
-      const highlightDate = this.attendance_Dates
+      this.attendance_Dates.forEach(el => {
+        if (el.status === true) {
+          this.presentDateArray.push(el)
+        }
+      })
+      const highlightDate = this.presentDateArray
         .map(strDate => new Date(strDate.date))
         .some(d => d.getDate() === date.getDate() && d.getMonth() === date.getMonth() && d.getFullYear() === date.getFullYear());
-      
-        return highlightDate ? 'present-date' : '';
+
+      return highlightDate ? 'present-date' : '';
+    };
+  }
+  absentClass() {
+    return (date: Date): MatCalendarCellCssClasses => {
+      this.attendance_Dates.forEach(el => {
+        if (el.status === false) {
+          this.absentDateArray.push(el)
+        }
+      })
+      const highlightDate = this.absentDateArray
+        .map(strDate => new Date(strDate.date))
+        .some(d => d.getDate() === date.getDate() && d.getMonth() === date.getMonth() && d.getFullYear() === date.getFullYear());
+
+      return highlightDate ? 'absent-date' : '';
     };
   }
 
@@ -211,6 +232,10 @@ export class AllEmployeesComponent implements OnInit {
         this.present_dates.push({ 'date': el, 'status': Number(this.emp_status) })
       })
       this.attendance_Dates.push(...this.present_dates)
+      this.displayError.create(
+        'success', 'Success', 'Date is marked! Please click on given Button below',
+        { nzDuration: 6500 }
+      );
     }
   }
 
