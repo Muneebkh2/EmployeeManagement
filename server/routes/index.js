@@ -1,5 +1,7 @@
 const express = require('express')
 const router = express.Router()
+// const auth  = require('./auth')
+// const middlewareJwt = require('../utils/middleware').validateToken;
 
 // ========
 // Controllers Imports Here
@@ -40,7 +42,7 @@ router.delete('/admin/delete/:id', adminController.deleteAdmin)
 // Get Employee By ID
 router.get('/employee/id/:id', employeeController.getEmployeeById)
 // Get All Employees
-router.get('/employee/all', employeeController.getAllEmployees)
+router.get('/employee/all' ,employeeController.getAllEmployees)
 // Create Employee
 router.post('/employee/create', employeeController.createEmployee)
 // Update Employee

@@ -1,6 +1,11 @@
 import express from 'express' // import express
 import bodyParser from 'body-parser'
 require('dotenv').config();
+const passport = require('passport');
+require('./config/passport');
+
+const middlewareJwt = require('./utils/middleware').validateToken;
+
 let cors = require('cors')
 // import Controllers...
 // import AdminController from './app/controller/AdminController'
@@ -10,6 +15,8 @@ const routes = require('./routes/index')
 
 const app = express() // define app
 
+// Passport setup
+app.use(passport.initialize());
 // BodyParse USED IN index.js
 app.use(
     bodyParser.json(),
